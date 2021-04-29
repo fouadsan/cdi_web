@@ -40,7 +40,7 @@
                      class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
                      <div class="thumb">
                         <a href="#">
-                           <img class="img-fluid" src="assets/img/post/preview.png" alt="">
+                           <img class="img-fluid" src="{% static 'main/assets/img/post/preview.png' %}" alt="">
                         </a>
                      </div>
                      <div class="arrow">
@@ -58,9 +58,14 @@
                   <div
                      class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
                      <div class="detials">
-                        <p>Next Post</p>
+                        <p>Prev Post</p>
                         <a href="#">
-                           <h4 style="color: #2d2d2d;">Telescopes 101</h4>
+                           <h4 style="color: #2d2d2d;">Space The Final Frontier</h4>
+                        </a>
+                     </div>
+                     <div class="thumb">
+                        <a href="#">
+                           <img class="img-fluid" src="{% static 'main/assets/img/post/preview.png' %}" alt="">
                         </a>
                      </div>
                      <div class="arrow">
@@ -68,11 +73,8 @@
                            <span class="lnr text-white ti-arrow-right"></span>
                         </a>
                      </div>
-                     <div class="thumb">
-                        <a href="#">
-                           <img class="img-fluid" src="assets/img/post/next.png" alt="">
-                        </a>
-                     </div>
+
+
                   </div>
                </div>
             </div>
@@ -94,7 +96,7 @@
                   <div class="single-comment justify-content-between d-flex">
                      <div class="user justify-content-between d-flex">
                         <div class="thumb">
-                           <img src="assets/img/blog/comment_1.png" alt="">
+                           <img src="{% static 'main/assets/img/blog/comment_1.png' %}" alt="">
                         </div>
                         <div class="desc">
                            <p class="comment">{{ comment.comment_text }}</p>

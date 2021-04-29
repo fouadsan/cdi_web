@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "crossroads-312221",
+  "private_key_id": "0b5593c3472a7cb949d4dada291614bcbaea5c0c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDrJJLf2LLNW36n\naX6XJgPpehZFwl27jMm4r55cXI8M5FZS6SHeHoKotq3n2t4ysH7cF/dDI/aiyDHq\nMs4FAU5c+JDDjqQwwMptTJsKe6+q2mDq8LvvLc+3mqI3yXhk8qLiUAzFJaXJvpzA\nJcUb3m41192TIKuxoCEfPNTJturidz/6NVWiXBwLIH37feFV+9xtCPr2JXs8aOXQ\ny39uPU0aADb9L4nn7xGMqzQzrMhgPLjUC0hOFhtmLQmZPRZwVX2N+77zPf5B6Rz0\nVI1tZd1c71AbVuREeY+xfBa2AkyzVARs2vbKjc4TbHkl+Ygdxlyxamb1yCe551+M\nEQzYS8pHAgMBAAECggEAGMbKSRbixDurTUWS5qdFS0EnfqM70CrGCJVMqOvB0Phw\nVh0lieuKFe/lxCPuPMYXH+bQkX0FHGLey5Ad4C4ijS5NxqVNjKuLyNeFEKY2vNh0\n1NyX2NxpYi3DgQBUFMLyQclwhwdwACF7D84LBmQ6FadQvBN5s+YtB0cYHscM2d7G\nII3dGcuqkhyqcQUGlUWLpmkUOQ165JWkBWef3F0HZqqGm3m9/SNi4M0cGj/m7nhU\nojiMDVedKjlmNN+D9i26tr2uGv95QYej585u3dJwF6OPz5vY4KK6KqLQHYInaOUQ\n6eJv89uetnl9sk6ujBkpi5hdClKrTD5v7lEx2F7rXQKBgQD71Rd4GHWZcBDMn2FN\nl1TCmKQa5HiRPNMYv4FlsqZRJGjpqUFxhbrlr59oLndTXxc9UN8kzDWApaKlgwXB\nAoH2/OafZSOqQ7ghcnmjhvtIy7lBFG5NmPQfIZOnAugqzB4hw/5CtfEr7SKKZXux\npCrKC0qyRGmi+yg/J4pSrslzhQKBgQDvCMaJaqhO+QegsGoSdsi6XwQTWmcqUNO1\nCxMTcxTL422yfzxRepCNzOuVxVVxgYRFfyl1m26p66cfzwxkXJ4qJcgmLzIjK0sL\n4GA8gV2W/hqqF6jAUifSayIl4KdJZsaaR1AdQtZ7QfSWNpHvp64ouZcJBkZOXSVm\nw6XqzEzyWwKBgQC5zxFg8BMc4j3S7KnbmRPV/M/gc8Ct0MYklXBA/B6Q8h9igBqk\nSzqKLBmeweITJq8784ahXPcA87VdD55YOaRw+0qiQvqcrxiVvSQYzwhrPr1yUkPM\nh1Vf/uM1sARjR3XYDgd1a08FzRLWMGiiunFD4C7991JGCbA5YNBDj2leDQKBgQDZ\nHhd36jFGylxrUNKIQuzAnF2PVqYugYxK/ewt1nIlYEbbw0Z+m92Bb4jtWXjqyMHk\nfkSiVrSGE06STfbrklT346mRRX09BK3986h2TOs9o0GFDkhxqC4Tqswxq4VH3tq2\nd+AFNBitjJMlfhvAm4ZN54WQ5Oonc+PtG/kw9LFP0QKBgQCX896SxtdOGGZPiOR+\ne5TYALiS6+o3FZl9dg0wo8l1qllvXZrD2581qnm7A3QJRpi1w2ZM3xFqlGZ0jDtc\nCZB2Y/NharKsk039ETKtFwS9odrXb4wLLO0hzhtEhI5jCW0KxKSGxFSjFM+SusJd\nIz53MYKcERHlfgDjouFHXTFekA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "cdi-upload-admin@crossroads-312221.iam.gserviceaccount.com",
+  "client_id": "106886638073611569764",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/cdi-upload-admin%40crossroads-312221.iam.gserviceaccount.com"
+}

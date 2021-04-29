@@ -10,7 +10,7 @@ from main.models import Section
 def blog_list_view(request):
     dataset = BlogModel.objects.all()
     sections = Section.objects.all()
-    recent_posts = BlogModel.objects.all()[:3]
+    recent_posts = BlogModel.objects.all()[:4]
     if request.method == 'POST':
         form = SearchForm(request.POST)
         if form.is_valid():
