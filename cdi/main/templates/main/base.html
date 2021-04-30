@@ -19,7 +19,8 @@
     <link rel="stylesheet" href="{% static 'main/assets/css/animate.min.css' %}">
     <link rel="stylesheet" href="{% static 'main/assets/css/animated-headline.css' %}">
 	<link rel="stylesheet" href="{% static 'main/assets/css/magnific-popup.css' %}">
-	<link rel="stylesheet" href="{% static 'main/assets/css/fontawesome-all.min.css' %}">
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 	<link rel="stylesheet" href="{% static 'main/assets/css/themify-icons.css' %}">
 	<link rel="stylesheet" href="{% static 'main/assets/css/slick.css' %}">
 	<link rel="stylesheet" href="{% static 'main/assets/css/nice-select.css' %}">
@@ -44,15 +45,20 @@
             <div class="header-top_area">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-6 col-md-8">
+                        <div class="col-lg-9 col-md-8">
                             <div class="short_contact_list">
                                 <ul>
-                                    <li><a href="#">+880 4664 216</a></li>
-                                    <li><a href="#">Mon - Sat 10:00 - 7:00</a></li>
+                                    <li><a href="#"><i class="fa fa-phone"></i> &nbsp;+880 4664 216</a></li>
+                                    <li><a href="#"><i class="fa fa-home"></i> &nbsp;Sat - Fri 08:00 - 16:00</a></li>
+                                    {% if is_open %}
+                                        <li><a href="#"><i class="fas fa-door-open"></i> &nbsp;Open</a></li>
+                                    {% else %}
+                                        <li><a href="#"><i class="fas fa-door-closed"></i> &nbsp;Closed</a></li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-4 ">
+                        <div class="col-lg-3 col-md-4 ">
                             <div class="social_media_links">
                                 <a href="#">
                                     <i class="fab fa-facebook-f"></i>

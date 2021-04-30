@@ -22,7 +22,7 @@ class CommentModel(models.Model):
     your_name = models.CharField(max_length=100)
     your_email = models.EmailField(max_length=254)
     comment_text = models.TextField()
-    blog = models.ForeignKey('BlogModel', on_delete=models.CASCADE)
+    blog = models.ForeignKey('BlogModel', on_delete=models.CASCADE, related_name='commented_blog')
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

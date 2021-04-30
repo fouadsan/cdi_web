@@ -36,46 +36,48 @@
             </div>
             <div class="navigation-area">
                <div class="row">
-                  <div
-                     class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-                     <div class="thumb">
-                        <a href="#">
-                           <img class="img-fluid" src="{% static 'main/assets/img/post/preview.png' %}" alt="">
-                        </a>
+                  {% if data.get_previous_by_timestamp %}
+                     <div
+                        class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+                        <div class="thumb">
+                           <a href="{% url 'blog:blog-detail' data.get_previous_by_timestamp.id %}">
+                              <img class="img-fluid" src="{{ data.get_previous_by_timestamp.image.url }}" alt="">
+                           </a>
+                        </div>
+                        <div class="arrow">
+                           <a href="{% url 'blog:blog-detail' data.get_previous_by_timestamp.id %}">
+                              <span class="lnr text-white ti-arrow-left"></span>
+                           </a>
+                        </div>
+                        <div class="detials">
+                           <p>Prev Post</p>
+                           <a href="{% url 'blog:blog-detail' data.get_previous_by_timestamp.id %}">
+                              <h4 style="color: #2d2d2d;">{{ data.get_previous_by_timestamp.blog_title }}</h4>
+                           </a>
+                        </div>
                      </div>
-                     <div class="arrow">
-                        <a href="#">
-                           <span class="lnr text-white ti-arrow-left"></span>
-                        </a>
+                  {% endif %}
+                  {% if data.get_next_by_timestamp %}
+                     <div
+                        class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+                        <div class="detials">
+                           <p>Next Post</p>
+                           <a href="{% url 'blog:blog-detail' data.get_next_by_timestamp.id %}">
+                              <h4 style="color: #2d2d2d;">{{ data.get_next_by_timestamp.blog_title }}</h4>
+                           </a>
+                        </div>
+                        <div class="thumb">
+                           <a href="{% url 'blog:blog-detail' data.get_next_by_timestamp.id %}">
+                              <img class="img-fluid" src="{{ data.get_next_by_timestamp.image.url }}" alt="">
+                           </a>
+                        </div>
+                        <div class="arrow">
+                           <a href="{% url 'blog:blog-detail' data.get_next_by_timestamp.id %}">
+                              <span class="lnr text-white ti-arrow-right"></span>
+                           </a>
+                        </div>
                      </div>
-                     <div class="detials">
-                        <p>Prev Post</p>
-                        <a href="#">
-                           <h4 style="color: #2d2d2d;">Space The Final Frontier</h4>
-                        </a>
-                     </div>
-                  </div>
-                  <div
-                     class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-                     <div class="detials">
-                        <p>Prev Post</p>
-                        <a href="#">
-                           <h4 style="color: #2d2d2d;">Space The Final Frontier</h4>
-                        </a>
-                     </div>
-                     <div class="thumb">
-                        <a href="#">
-                           <img class="img-fluid" src="{% static 'main/assets/img/post/preview.png' %}" alt="">
-                        </a>
-                     </div>
-                     <div class="arrow">
-                        <a href="#">
-                           <span class="lnr text-white ti-arrow-right"></span>
-                        </a>
-                     </div>
-
-
-                  </div>
+                  {% endif %}
                </div>
             </div>
          </div>

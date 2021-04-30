@@ -177,10 +177,14 @@
 /* line 277, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_header.scss */
 .header-area .header-top_area .short_contact_list ul li a {
   font-size: 16px;
-  color: #ffffff;
+  color: #C7C7C7;
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   margin-right: 50px;
+}
+
+.header-area .header-top_area .short_contact_list ul li a:hover {
+  color: #eb592d;
 }
 
 @media (max-width: 767px) {
@@ -217,4 +221,9 @@
 .popular_post_widget .post_item img {
     width: 80px;
     height: 80px;
+}
+
+.navigation-area .thumb img {
+    width: 60px;
+    height: 60px;
 }

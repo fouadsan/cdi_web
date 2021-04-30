@@ -4,10 +4,12 @@ from django.http import HttpResponse
 from .forms import ContactUs
 from django.core.mail import send_mail
 from django.contrib import messages
+from .utils import store_open
 
 
 def home(request):
     form = ContactUs()
+    is_open = store_open()
     if request.method == 'POST':
         form = ContactUs(request.POST)
         from_name = str(form['name'].value())
@@ -26,6 +28,7 @@ def home(request):
 
     context = {
         'title': 'Home',
+        'is_open': is_open,
         'form': form
     }
     return render(request, 'main/home.html', context)

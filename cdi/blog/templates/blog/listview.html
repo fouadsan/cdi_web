@@ -21,7 +21,7 @@
                             <p>{{ data.blog }}</p>
                             <ul class="blog-info-link">
                                 <li><a><i class="fa fa-cog"></i>{{ data.section }}</a></li>
-                                <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                                <li><a href="#"><i class="fa fa-comments"></i>({{ data.commented_blog.count }} Comment{{ data.commented_blog.count|pluralize }})</a></li>
                             </ul>
                         </div>
                     </article>
