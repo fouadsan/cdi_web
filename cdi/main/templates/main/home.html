@@ -1,54 +1,29 @@
 {% extends 'main/base.html' %}
 {% load static %}
+<script type="text/javascript" src="{% static 'main/assets/js/product-filter.js' %}"></script>
 
 {% block content %}
     <main>
         <!--? slider-area start -->
 		<div id="intro" class="slider-area">
-			<div class="slider-full-active owl-carousel custom-dots">
-				<div class="slide-full slider-height d-flex align-items-center" style="background-image: url(static/main/assets/img/hero/h1_hero.png);">
-					<div class="container">
-						<div class="row">
-							<div class="col-xl-6 col-lg-8 col-md-7 col-sm-8">
-								<div class="slide-full-content">
-                                    <span>#1 aritecture in united stare</span>
-									<h1>Crossroads of<br> Industries</h1>
-									<p>We creating lasting impression through architecture design.</p>
-									<a class="btn" href="#">access the store</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="slide-full d-flex slider-height align-items-center" style="background-image: url(static/main/assets/img/hero/h1_hero2.png);">
-					<div class="container">
-						<div class="row">
-							<div class="col-xl-6 col-lg-8 col-md-7 col-sm-8">
-								<div class="slide-full-content">
-                                    <span>#1 aritecture in united stare</span>
-									<h1>Focus on<br> Design Quality</h1>
-									<p>We creating lasting impression through architecture design.</p>
-									<a class="btn" href="#">access the store</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="slide-full d-flex slider-height align-items-center" style="background-image: url(static/main/assets/img/hero/h1_hero.png);">
-					<div class="container">
-						<div class="row">
-							<div class="col-xl-6 col-lg-8 col-md-7 col-sm-8">
-								<div class="slide-full-content">
-                                    <span>#1 aritecture in united stare</span>
-									<h1>Focus on<br> Design Quality</h1>
-									<p>We creating lasting impression through architecture design.</p>
-									<a class="btn" href="#">access the store</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+            {% for banner in banners %}
+                <div class="slider-full-active owl-carousel custom-dots">
+                    <div class="slide-full slider-height d-flex align-items-center" style="background-image: url({{ banner.image.url }});">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-8 col-md-7 col-sm-8">
+                                    <div class="slide-full-content">
+                                        <span>#1 aritecture in united stare</span>
+                                        <h1>Crossroads of<br> Industries</h1>
+                                        <p>We creating lasting impression through architecture design.</p>
+                                        <a class="btn" href="{% url 'shop:home' %}">access the store</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
 		</div>
 		<!-- slider-area end -->
         <!--? About Start-->
@@ -96,39 +71,21 @@
                 </div>
                 <!-- Section caption -->
                 <div class="row justify-content-center">
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-9 wow bounceInUp" data-wow-duration="1.4s">
-                        <div class="services-caption text-center mb-30">
-                            <div class="service-icon">
-                                <i class="flaticon-null"></i>
+                    {% if sections %}
+                        {% for section in sections %}
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-9 wow bounceInUp" data-wow-duration="1.4s">
+                                <div class="services-caption text-center mb-30">
+                                    <div class="service-icon">
+                                        <i class="{{ section.icon_class }}"></i>
+                                    </div>
+                                    <div class="service-cap">
+                                        <h4><a>{{ section.name }}</a></h4>
+                                        <p>{{ section.description }}</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="service-cap">
-                                <h4><a>Architecture</a></h4>
-                                <p>Sorem spsum dolor sit amsectetr adipisclit, seddo eiusmod tempr incididunt laborea.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-9 wow bounceInUp" data-wow-duration="1.4s">
-                        <div class="services-caption active text-center mb-30">
-                            <div class="service-icon">
-                                <i class="flaticon-null-1"></i>
-                            </div>
-                            <div class="service-cap">
-                                <h4><a>Interior Design</a></h4>
-                                <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-9 wow bounceInUp" data-wow-duration="1.4s">
-                        <div class="services-caption text-center mb-30">
-                            <div class="service-icon">
-                                <i class="flaticon-null-2"></i>
-                            </div>
-                            <div class="service-cap">
-                                <h4><a>Urban Design</a></h4>
-                                <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
-                            </div>
-                        </div>
-                    </div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div>
         </section>

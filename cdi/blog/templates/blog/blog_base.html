@@ -1,31 +1,17 @@
-{% extends 'main/base.html' %}
+{% extends 'main/base2.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 
-{% block content %}
+{% block content2 %}
     <main>
-        <!--? Hero Start -->
-        <div class="slider-area2">
-            <div class="slider-height2 d-flex align-items-center">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="hero-cap hero-cap2 pt-70 text-center">
-                                <h2>{{ title }}</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Hero End -->
+
         <!--? Blog Area Start-->
         <section class="blog_area {{ class }} section-padding">
             <div class="container">
                 <div class="row">
-                  {% block content2 %}
+                  {% block content3 %}
 
-                  {% endblock content2 %}
+                  {% endblock content3 %}
                   <div class="col-lg-4">
                         <div class="blog_right_sidebar">
                             <aside class="single_sidebar_widget search_widget">
@@ -93,4 +79,4 @@
         </section>
         <!-- Blog Area End -->
     </main>
-{% endblock content %}
+{% endblock content2 %}

@@ -1,7 +1,7 @@
 {% extends 'blog/blog_base.html' %}
 {% load static %}
 
-{% block content2 %}
+{% block content3 %}
     <div class="col-lg-8 mb-5 mb-lg-0">
         <div class="blog_left_sidebar">
             {% if page_obj %}
@@ -55,12 +55,8 @@
                     </ul>
                 </nav>
             {% else %}
-                <div class="col-lg-8 mb-5 mb-lg-0">
-                    <div class="blog_left_sidebar">
-                        <h1>No Blog Found.</h1>
-                    </div>
-                </div>
+                <h1>No Blog Found.</h1>
             {% endif %}
         </div>
     </div>
-{% endblock content2 %}
+{% endblock content3 %}

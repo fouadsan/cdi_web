@@ -13,6 +13,7 @@ class BlogModel(models.Model):
 
     class Meta:
         ordering = ('-timestamp', )
+        verbose_name_plural = '1. BlogModels'
 
     def __str__(self):
         return self.blog_title
@@ -24,6 +25,10 @@ class CommentModel(models.Model):
     comment_text = models.TextField()
     blog = models.ForeignKey('BlogModel', on_delete=models.CASCADE, related_name='commented_blog')
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-timestamp', )
+        verbose_name_plural = '2. CommentModels'
 
     def __str__(self):
         return f'Comment by Name: {self.your_name}'

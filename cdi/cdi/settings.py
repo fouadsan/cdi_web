@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'main',
-    'blog',
+    'shop',
+    'blog'
+
 ]
 
 MIDDLEWARE = [
@@ -67,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'shop.template_context.get_filters',
             ],
         },
     },

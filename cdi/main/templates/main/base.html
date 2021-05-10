@@ -19,12 +19,17 @@
     <link rel="stylesheet" href="{% static 'main/assets/css/animate.min.css' %}">
     <link rel="stylesheet" href="{% static 'main/assets/css/animated-headline.css' %}">
 	<link rel="stylesheet" href="{% static 'main/assets/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'main/assets/css/jquery-ui.min.css' %}" type="text/css">
 	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
           integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 	<link rel="stylesheet" href="{% static 'main/assets/css/themify-icons.css' %}">
 	<link rel="stylesheet" href="{% static 'main/assets/css/slick.css' %}">
 	<link rel="stylesheet" href="{% static 'main/assets/css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'main/assets/css/elegant-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'main/assets/css/xzoom.css' %}">
+    <link type="text/css" rel="stylesheet" media="all" href="{% static 'main/assets/css/magnific-popup.css' %}" />
 	<link rel="stylesheet" href="{% static 'main/assets/css/style.css' %}">
+
 </head>
 <body>
     <!-- ? Preloader Start -->
@@ -48,12 +53,12 @@
                         <div class="col-lg-9 col-md-8">
                             <div class="short_contact_list">
                                 <ul>
-                                    <li><a href="#"><i class="fa fa-phone"></i> &nbsp;+880 4664 216</a></li>
-                                    <li><a href="#"><i class="fa fa-home"></i> &nbsp;Sat - Fri 08:00 - 16:00</a></li>
+                                    <li><a><i class="fa fa-phone"></i> &nbsp;+880 4664 216</a></li>
+                                    <li><a><i class="fa fa-home"></i> &nbsp;Sat - Fri 08:00 - 16:00</a></li>
                                     {% if is_open %}
-                                        <li><a href="#"><i class="fas fa-door-open"></i> &nbsp;Open</a></li>
+                                        <li><a class="store-open"><i class="fas fa-door-open"></i> &nbsp;Open</a></li>
                                     {% else %}
-                                        <li><a href="#"><i class="fas fa-door-closed"></i> &nbsp;Closed</a></li>
+                                        <li><a class="store-closed"><i class="fas fa-door-closed"></i> &nbsp;Closed</a></li>
                                     {% endif %}
                                 </ul>
                             </div>
@@ -95,12 +100,29 @@
 								</div>
 								<nav class="hamburger-menu">
 									<ul id="navigation">
-										<li><a href="#intro">Home</a></li>
-                                        <li><a href="#">Shop</a></li>
-										<li><a href="#about">About</a></li>
-										<li><a href="#services">Services</a></li>
+                                        {% url 'main:home' as home_url %}
+                                        {% if request.get_full_path == home_url %}
+                                            <li><a href="#intro">Home</a></li>
+                                        {% else %}
+										    <li><a href="{{ home_url }}">Home</a></li>
+                                        {% endif %}
+                                        <li><a href="{% url 'shop:home' %}">Shop</a></li>
+                                        {% if request.get_full_path == home_url %}
+										    <li><a href="#about">About</a></li>
+                                        {% else %}
+                                            <li><a href="{{ home_url }}">About</a></li>
+                                        {% endif %}
+                                        {% if request.get_full_path == home_url %}
+										    <li><a href="#services">Services</a></li>
+                                        {% else %}
+                                            <li><a href="{{ home_url }}">About</a></li>
+                                        {% endif %}
                                         <li><a href="{% url 'blog:blogs' %}">blog</a></li>
-										<li><a href="#contact">contact</a></li>
+                                        {% if request.get_full_path == home_url %}
+                                            <li><a href="#contact">contact</a></li>
+                                        {% else %}
+                                            <li><a href="{{ home_url }}">About</a></li>
+                                        {% endif %}
 									</ul>
 								</nav>
 							</div>
@@ -223,10 +245,12 @@
     <script src="{% static 'main/assets/js/popper.min.js' %}"></script>
     <script src="{% static 'main/assets/js/bootstrap.min.js' %}"></script>
     <!-- Jquery Mobile Menu -->
+    <script src="{% static 'main/assets/js/jquery.nicescroll.min.js' %}"></script>
     <script src="{% static 'main/assets/js/jquery.slicknav.min.js' %}"></script>
 
     <!-- Jquery Slick , Owl-Carousel Plugins -->
     <script src="{% static 'main/assets/js/owl.carousel.min.js' %}"></script>
+
     <script src="{% static 'main/assets/js/slick.min.js' %}"></script>
     <!-- One Page, Animated-HeadLin -->
     <script src="{% static 'main/assets/js/wow.min.js' %}"></script>
@@ -245,16 +269,20 @@
     <script src="{% static 'main/assets/js/jquery.countdown.min.js' %}"></script>
     <script src="{% static 'main/assets/js/hover-direction-snake.min.js' %}"></script>
 
+
     <!-- contact js -->
+    <script src="{% static 'main/assets/js/jquery-ui.min.js' %}"></script>
     <script src="{% static 'main/assets/js/contact.js' %}"></script>
     <script src="{% static 'main/assets/js/jquery.form.js' %}"></script>
     <script src="{% static 'main/assets/js/jquery.validate.min.js' %}"></script>
     <script src="{% static 'main/assets/js/mail-script.js' %}"></script>
     <script src="{% static 'main/assets/js/jquery.ajaxchimp.min.js' %}"></script>
-
+    <script src="{% static 'main/assets/js/xzoom.min.js' %}"></script>
+    <script src="{% static 'main/assets/js/magnific-popup.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/assets/js/product-filter.js' %}"></script>
     <!-- Jquery Plugins, main Jquery -->
     <script src="{% static 'main/assets/js/plugins.js' %}"></script>
     <script src="{% static 'main/assets/js/main.js' %}"></script>
 
-    </body>
+</body>
 </html>
