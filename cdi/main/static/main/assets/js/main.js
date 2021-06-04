@@ -1,17 +1,22 @@
 (function ($)
   { "use strict"
 
-
-
-
-
-
 /* 1. Proloder */
     $(window).on('load', function () {
-      $('#preloader-active').delay(450).fadeOut('slow');
-      $('body').delay(450).css({
-        'overflow': 'visible'
-      });
+        $(".loader").fadeOut();
+        $("#preloder").delay(200).fadeOut("slow");
+
+        /*------------------
+            Gallery filter
+        --------------------*/
+        $('.featured__controls li').on('click', function () {
+            $('.featured__controls li').removeClass('active');
+            $(this).addClass('active');
+        });
+        if ($('.featured__filter').length > 0) {
+            var containerEl = document.querySelector('.featured__filter');
+            var mixer = mixitup(containerEl);
+        }
     });
 
     /* 2. sticky And Scroll UP */
@@ -238,20 +243,25 @@
 
  // NEW
 
+    //Humberger Menu
+    $(".humberger__open").on('click', function () {
+        $(".humberger__menu__wrapper").addClass("show__humberger__menu__wrapper");
+        $(".humberger__menu__overlay").addClass("active");
+        $("body").addClass("over_hid");
+    });
+
+    $(".humberger__menu__overlay").on('click', function () {
+        $(".humberger__menu__wrapper").removeClass("show__humberger__menu__wrapper");
+        $(".humberger__menu__overlay").removeClass("active");
+        $("body").removeClass("over_hid");
+    });
+
  	/*------------------
 		Navigation
 	--------------------*/
     $(".mobile-menu").slicknav({
         prependTo: '#mobile-menu-wrap',
         allowParentLinks: true
-    });
-
-    /*------------------
-        Background Set
-    --------------------*/
-    $('.set-bg').each(function () {
-        var bg = $(this).data('setbg');
-        $(this).css('background-image', 'url(' + bg + ')');
     });
 
     /*-----------------------
@@ -353,27 +363,6 @@
         autoplay: true
     });
 
-    /*-----------------------
-		Price Range Slider
-	------------------------ */
-    var rangeSlider = $(".price-range"),
-        minamount = $("#minamount"),
-        maxamount = $("#maxamount"),
-        minPrice = rangeSlider.data('min'),
-        maxPrice = rangeSlider.data('max');
-    rangeSlider.slider({
-        range: true,
-        min: minPrice,
-        max: maxPrice,
-        values: [minPrice, maxPrice],
-        slide: function (event, ui) {
-            minamount.val('$' + ui.values[0]);
-            maxamount.val('$' + ui.values[1]);
-        }
-    });
-    minamount.val('$' + rangeSlider.slider("values", 0));
-    maxamount.val('$' + rangeSlider.slider("values", 1));
-
     /*--------------------------
         Select
     ----------------------------*/
@@ -437,69 +426,70 @@
 })(jQuery);
 
 
-    $(document).ready(function() {
-        $('.xzoom4, .xzoom-gallery4').xzoom({tint: '#006699', Xoffset: 15});
+$(document).ready(function() {
+    $('.xzoom4, .xzoom-gallery4').xzoom({tint: '#006699', Xoffset: 15});
 
-        //Integration with hammer.js
-        var isTouchSupported = 'ontouchstart' in window;
+    //Integration with hammer.js
+    var isTouchSupported = 'ontouchstart' in window;
 
-        if (isTouchSupported) {
-            //If touch device
-            $('.xzoom4').each(function(){
-                var xzoom = $(this).data('xzoom');
-                xzoom.eventunbind();
-            });
-
-
-
-        $('.xzoom4').each(function() {
+    if (isTouchSupported) {
+        //If touch device
+        $('.xzoom4').each(function(){
             var xzoom = $(this).data('xzoom');
-            $(this).hammer().on("tap", function(event) {
-                event.pageX = event.gesture.center.pageX;
-                event.pageY = event.gesture.center.pageY;
-                var s = 1, ls;
-
-                xzoom.eventmove = function(element) {
-                    element.hammer().on('drag', function(event) {
-                        event.pageX = event.gesture.center.pageX;
-                        event.pageY = event.gesture.center.pageY;
-                        xzoom.movezoom(event);
-                        event.gesture.preventDefault();
-                    });
-                }
-
-                var counter = 0;
-                xzoom.eventclick = function(element) {
-                    element.hammer().on('tap', function() {
-                        counter++;
-                        if (counter == 1) setTimeout(openfancy,300);
-                        event.gesture.preventDefault();
-                    });
-                }
-
-                function openfancy() {
-                    if (counter == 2) {
-                        xzoom.closezoom();
-                        $.fancybox.open(xzoom.gallery().cgallery);
-                    } else {
-                        xzoom.closezoom();
-                    }
-                    counter = 0;
-                }
-            xzoom.openzoom(event);
-            });
+            xzoom.eventunbind();
         });
 
-        } else {
-            //If not touch device
 
-            //Integration with fancybox plugin
-            $('#xzoom-fancy').bind('click', function(event) {
-                var xzoom = $(this).data('xzoom');
-                xzoom.closezoom();
-                $.fancybox.open(xzoom.gallery().cgallery, {padding: 0, helpers: {overlay: {locked: false}}});
-                event.preventDefault();
-            });
-        }
+
+    $('.xzoom4').each(function() {
+        var xzoom = $(this).data('xzoom');
+        $(this).hammer().on("tap", function(event) {
+            event.pageX = event.gesture.center.pageX;
+            event.pageY = event.gesture.center.pageY;
+            var s = 1, ls;
+
+            xzoom.eventmove = function(element) {
+                element.hammer().on('drag', function(event) {
+                    event.pageX = event.gesture.center.pageX;
+                    event.pageY = event.gesture.center.pageY;
+                    xzoom.movezoom(event);
+                    event.gesture.preventDefault();
+                });
+            }
+
+            var counter = 0;
+            xzoom.eventclick = function(element) {
+                element.hammer().on('tap', function() {
+                    counter++;
+                    if (counter == 1) setTimeout(openfancy,300);
+                    event.gesture.preventDefault();
+                });
+            }
+
+            function openfancy() {
+                if (counter == 2) {
+                    xzoom.closezoom();
+                    $.fancybox.open(xzoom.gallery().cgallery);
+                } else {
+                    xzoom.closezoom();
+                }
+                counter = 0;
+            }
+        xzoom.openzoom(event);
+        });
     });
+
+    } else {
+        //If not touch device
+
+        //Integration with fancybox plugin
+        $('#xzoom-fancy').bind('click', function(event) {
+            var xzoom = $(this).data('xzoom');
+            xzoom.closezoom();
+            $.fancybox.open(xzoom.gallery().cgallery, {padding: 0, helpers: {overlay: {locked: false}}});
+            event.preventDefault();
+        });
+    }
+});
+
 

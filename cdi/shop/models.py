@@ -50,7 +50,7 @@ class Product(models.Model):
         return self.name
 
     class Meta:
-        get_latest_by = 'created_at'
+        ordering = ('-created_at', )
         verbose_name_plural = '3. Products'
 
 

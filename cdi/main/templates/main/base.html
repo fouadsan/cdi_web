@@ -1,10 +1,15 @@
 <!doctype html>
 {% load static %}
+{% url 'main:home' as home_url %}
 <html class="no-js" lang="zxx">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title> Architects | Template </title>
+    {% if title %}
+        <title> CDI | {{ title }} </title>
+    {% else %}
+        <title> CDI </title>
+    {% endif %}
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'main/assets/img/favicon.ico' %}">
@@ -32,112 +37,250 @@
 
 </head>
 <body>
-    <!-- ? Preloader Start -->
-    <div id="preloader-active">
-        <div class="preloader d-flex align-items-center justify-content-center">
-            <div class="preloader-inner position-relative">
-                <div class="preloader-circle"></div>
-                <div class="preloader-img pere-text">
-                    <img src="{% static 'main/assets/img/logo/loder.png' %}" alt="">
-                </div>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Humberger Begin -->
+    <div class="humberger__menu__overlay"></div>
+    <div class="humberger__menu__wrapper">
+        <div class="humberger__menu__logo">
+            {% if request.get_full_path == home_url %}
+                <a href="#header"><img src="{% static 'main/assets/img/logo/logo.png' %}" alt=""></a>
+            {% else %}
+                <a href="{{ home_url }}"><img src="{% static 'main/assets/img/logo/logo.png' %}" alt=""></a>
+            {% endif %}
+        </div>
+        <div class="humberger__menu__cart">
+            <ul>
+                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                <li><a href="#"><i class="fa fa-shopping-bag"></i>
+                    <span class="cart-list">{{ request.session.cartdata|length }}</span></a></li>
+            </ul>
+        </div>
+        <div class="humberger__menu__widget">
+            <div class="header__top__right__language">
+                <img src="{% static 'main/assets/img/language.png' %}" alt="">
+                <div>English</div>
+                <span class="arrow_carrot-down"></span>
+                <ul>
+                    <li><a href="#">Spanis</a></li>
+                    <li><a href="#">English</a></li>
+                </ul>
             </div>
+            <div class="header__top__right__auth">
+                <a href="#"><i class="fa fa-user"></i> Login</a>
+            </div>
+        </div>
+        <nav class="humberger__menu__nav mobile-menu">
+            <ul>
+                {% if request.get_full_path == home_url %}
+                    <li class="active"><a href="#header">Home</a></li>
+                {% else %}
+                    <li><a href="{{ home_url }}">Home</a></li>
+                {% endif %}
+                <li><a href="{% url 'shop:home' %}">Shop</a>
+                    <ul class="header__menu__dropdown">
+                        <li><a href="{% url 'shop:home' %}">Shop</a></li>
+                        <li><a href="./shoping-cart.html">Wishlist</a></li>
+                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
+                        <li><a href="./checkout.html">Check Out</a></li>
+                    </ul>
+                </li>
+                {% if request.get_full_path == home_url %}
+                    <li><a href="#about">About</a></li>
+                {% else %}
+                    <li><a href="{{ home_url }}">About</a></li>
+                {% endif %}
+                {% if request.get_full_path == home_url %}
+                    <li><a href="#services">Services</a></li>
+                {% else %}
+                     <li><a href="{{ home_url }}">Services</a></li>
+                {% endif %}
+                <li><a href="{% url 'blog:blogs' %}">Blog</a></li>
+                {% if request.get_full_path == home_url %}
+                    <li><a href="#contact">Contact</a></li>
+                {% else %}
+                    <li><a href="{{ home_url }}">Contact</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <div id="mobile-menu-wrap"></div>
+        <div class="header__top__right__social">
+            <a href="#"><i class="fa fa-facebook" title="Facebook" target="_blank"></i></a>
+            <a href="#"><i class="fa fa-twitter" title="Twitter" target="_blank"></i></a>
+            <a href="#"><i class="fa fa-linkedin" title="Linkedin" target="_blank"></i></a>
+            <a href="#"><i class="fa fa-pinterest-p"></i></a>
+        </div>
+        <div class="humberger__menu__contact">
+            <ul>
+                <li><i class="fa fa-envelope"></i> f.benayad95@gmail.com</li>
+                <li>Free Shipping for all Order of $99</li>
+            </ul>
         </div>
     </div>
-    <!-- Preloader Start -->
-    <header id="header" class="header-top">
-        <!--? Header Start -->
-        <div class="header-area header-transparent">
-            <div class="header-top_area">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-9 col-md-8">
-                            <div class="short_contact_list">
-                                <ul>
-                                    <li><a><i class="fa fa-phone"></i> &nbsp;+880 4664 216</a></li>
-                                    <li><a><i class="fa fa-home"></i> &nbsp;Sat - Fri 08:00 - 16:00</a></li>
+    <!-- Humberger End -->
+
+    <!-- Header Section Begin -->
+    <header id="header" class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="header__top__left">
+                            <ul>
+                                <li>
+                                    <a href="mailto: f.benayad95@gmail.com">
+                                        <i class="fa fa-envelope fa-2x"></i> hello@colorlib.com
+                                    </a>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-home fa-2x"></i> &nbsp;Sat - Fri 08:00 - 16:00 &nbsp;</a>
                                     {% if is_open %}
-                                        <li><a class="store-open"><i class="fas fa-door-open"></i> &nbsp;Open</a></li>
+                                        <a class="store-open"> &nbsp;Open</a></li>
                                     {% else %}
-                                        <li><a class="store-closed"><i class="fas fa-door-closed"></i> &nbsp;Closed</a></li>
+                                        <a class="store-closed"> &nbsp;Closed</a></li>
                                     {% endif %}
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 ">
-                            <div class="social_media_links">
-                                <a href="#">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="fab fa-google-plus-g"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                            </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="main-header header-sticky">
-                <div class="container-fluid">
-                    <div class="row align-items-center">
-                        <!-- Logo -->
-                        <div class="col-xl-2 col-lg-2 col-md-1">
-                            <div class="logo">
-                                <a href="#intro"><img src="{% static 'main/assets/img/logo/logo.png' %}" alt=""></a>
+                    <div class="col-lg-6">
+                        <div class="header__top__right">
+                            <div class="header__top__right__social">
+                                <a href="https://www.facebook.com/people/Fou-Ad/100008522377284">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                                <a href="https://twitter.com/FouAd44261068">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/fafo-palermo-856949205/">
+                                    <i class="fa fa-linkedin"></i>
+                                </a>
                             </div>
-                        </div>
-                        <div class="col-xl-9 col-lg-10">
-							<div class="main-menu black-menu menu-bg-white d-none d-lg-block">
-								<div class="hamburger hamburger--collapse">
-									<div class="hamburger-box">
-										<div class="hamburger-inner"></div>
-									</div>
-								</div>
-								<nav class="hamburger-menu">
-									<ul id="navigation">
-                                        {% url 'main:home' as home_url %}
-                                        {% if request.get_full_path == home_url %}
-                                            <li><a href="#intro">Home</a></li>
-                                        {% else %}
-										    <li><a href="{{ home_url }}">Home</a></li>
-                                        {% endif %}
-                                        <li><a href="{% url 'shop:home' %}">Shop</a></li>
-                                        {% if request.get_full_path == home_url %}
-										    <li><a href="#about">About</a></li>
-                                        {% else %}
-                                            <li><a href="{{ home_url }}">About</a></li>
-                                        {% endif %}
-                                        {% if request.get_full_path == home_url %}
-										    <li><a href="#services">Services</a></li>
-                                        {% else %}
-                                            <li><a href="{{ home_url }}">About</a></li>
-                                        {% endif %}
-                                        <li><a href="{% url 'blog:blogs' %}">blog</a></li>
-                                        {% if request.get_full_path == home_url %}
-                                            <li><a href="#contact">contact</a></li>
-                                        {% else %}
-                                            <li><a href="{{ home_url }}">About</a></li>
-                                        {% endif %}
-									</ul>
-								</nav>
-							</div>
-						</div>
-                        <!-- Mobile Menu -->
-                        <div class="col-12">
-                            <div class="mobile_menu d-block d-lg-none"></div>
+                            <div class="header__top__right__language">
+                                <img src="{% static 'main/assets/img/language.png' %}" alt="">
+                                <div>English</div>
+                                <span class="arrow_carrot-down"></span>
+                                <ul>
+                                    <li><a href="#">French</a></li>
+                                    <li><a href="#">English</a></li>
+                                </ul>
+                            </div>
+                            <div class="header__top__right__auth">
+                                <a href="#"><i class="fa fa-user"></i> Login</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Header End -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="header__logo">
+                         <div class="humberger__menu__logo">
+                            {% if request.get_full_path == home_url %}
+                                <a href="#header"><img src="{% static 'main/assets/img/logo/logo.png' %}" alt=""></a>
+                            {% else %}
+                                <a href="{{ home_url }}"><img src="{% static 'main/assets/img/logo/logo.png' %}" alt=""></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <nav class="header__menu">
+                        <ul>
+                            {% url 'main:home' as home_url %}
+                            {% if request.get_full_path == home_url %}
+                                <li class="active"><a href="#header">Home</a></li>
+                            {% else %}
+                                <li><a href="{{ home_url }}">Home</a></li>
+                            {% endif %}
+                            <li><a href="{% url 'shop:home' %}">Shop</a>
+                                <ul class="header__menu__dropdown">
+                                    <li><a href="{% url 'shop:home' %}">Shop</a></li>
+                                    <li><a href="./shoping-cart.html">Wishlist</a></li>
+                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
+                                    <li><a href="./checkout.html">Check Out</a></li>
+                                </ul>
+                            </li>
+                            {% if request.get_full_path == home_url %}
+                                <li><a href="#about">About</a></li>
+                            {% else %}
+                                <li><a href="{{ home_url }}">About</a></li>
+                            {% endif %}
+                            {% if request.get_full_path == home_url %}
+                                <li><a href="#services">Services</a></li>
+                            {% else %}
+                                 <li><a href="{{ home_url }}">Services</a></li>
+                            {% endif %}
+                            <li><a href="{% url 'blog:blogs' %}">Blog</a></li>
+                            {% if request.get_full_path == home_url %}
+                                <li><a href="#contact">Contact</a></li>
+                            {% else %}
+                                <li><a href="{{ home_url }}">Contact</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-2">
+                    <div class="header__cart">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                            <li><a href="{% url 'shop:cart' %}"><i class="fa fa-shopping-bag"></i>
+                                <span class="cart-list">{{ request.session.cartdata|length }}</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="humberger__open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
     </header>
-    <!-- header end -->
+    <!-- Header Section End -->
+    <!-- Hero Section Begin -->
+    <section class="hero hero-normal">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="hero__categories">
+                        <div class="hero__categories__all">
+                            <i class="fa fa-bars"></i>
+                            <span>All Categories</span>
+                        </div>
+                        <ul>
+                            {% for category in categories %}
+                            <li><a href="#">{{ category.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form action="{% url 'shop:search' %}">
+                                <input name="q" type="text" placeholder="Search for product ?">
+                                <button type="submit" class="site-btn"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                        <div class="hero__search__phone">
+                            <div class="hero__search__phone__icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="hero__search__phone__text">
+                                <h5>+213 5 51 90 34 35</h5>
+                                <span>support 24/7 time</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
 
     {% block content %}
     {% endblock content %}
@@ -154,7 +297,7 @@
                                 <div class="single-footer-caption mb-30">
                                     <!-- logo -->
                                     <div class="footer-logo">
-                                        <a href="#intro"><img src="{% static 'main/assets/img/logo/logo2_footer.png' %}" alt=""></a>
+                                        <a href="#header"><img src="{% static 'main/assets/img/logo/logo2_footer.png' %}" alt=""></a>
                                     </div>
                                     <div class="footer-tittle">
                                         <div class="footer-pera">
@@ -219,8 +362,8 @@
                             <div class="footer-copy-right f-right">
                                 <!-- social -->
                                 <div class="footer-social">
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#"><i class="fab fa-twitter" title="Twitter" target="_blank"></i></a>
+                                    <a href="https://www.facebook.com/sai4ull" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
                                     <a href="#"><i class="fab fa-behance"></i></a>
                                     <a href="#"><i class="fas fa-globe"></i></a>
                                 </div>
@@ -283,6 +426,7 @@
     <!-- Jquery Plugins, main Jquery -->
     <script src="{% static 'main/assets/js/plugins.js' %}"></script>
     <script src="{% static 'main/assets/js/main.js' %}"></script>
+    <script src="{% static 'main/assets/js/custom.js' %}"></script>
 
 </body>
 </html>

@@ -252,9 +252,10 @@
 }
 .slicknav_nav .slicknav_arrow {
 	float: right;
-	font-size: 22px;
+	font-size: .9em;
+    margin: 0 0 0 .4em;
 	position: relative;
-	top: -9px;
+	top: 2px;
 }
 .slicknav_menu .slicknav_nav a:hover {
 	background: transparent;

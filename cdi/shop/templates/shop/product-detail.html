@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text">
-                        <h3>{{data.name }}</h3>
+                        <h3 class="product-title">{{ data.name }}</h3>
                         <div class="product__details__rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -45,29 +45,41 @@
                             <i class="fa fa-star-half-o"></i>
                             <span>(18 reviews)</span>
                         </div>
-                        <div class="product__details__price">${{ data.productattribute_set.first.price }}</div>
+                        <div class="product__details__price"><span class="product-price-{{ data.id }}">{{ data.productattribute_set.first.price }}</span></div>
                         <p>{{ data.description }}</p>
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
-                                    <input type="text" value="1">
+                                    <input type="text" id="productQty" value="1">
+                                    <input type="hidden" class="product-id-{{ data.id }}" value="{{ data.id }}">
+                                    <input type="hidden" class="product-name-{{ data.id }}" value="{{ data.name }}">
+                                    <input type="hidden" class="product-image-{{ data.id }}"
+                                           value="{{ data.productattribute_set.first.image_url1 }}" />
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="boxed-btn">ADD TO CARD</a>
+                        <button class="boxed-btn" type="button" id="addToCartBtn"  data-item="{{ data.id }}">
+                            ADD TO CART
+                        </button>
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                         <ul>
                             <li><b>Availability</b> <span>In Stock</span></li>
                             <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
                             <li><b>Weight</b> <span>0.5 kg</span></li>
-                            <li><b>Share on</b>
-                                <div class="share">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
-                                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                                </div>
-                            </li>
+                            <div class="share-btn-container">
+                              <button class="facebook-btn">
+                                  <i class="fab fa-facebook"></i>
+                              </button>
+                              <button class="twitter-btn">
+                                  <i class="fab fa-twitter"></i>
+                              </button>
+                              <button class="linkedin-btn">
+                                  <i class="fab fa-linkedin"></i>
+                              </button>
+                              <button class="whatsapp-btn">
+                                  <i class="fab fa-whatsapp"></i>
+                              </button>
+                            </div>
                         </ul>
                     </div>
                 </div>
@@ -162,7 +174,7 @@
                                 </ul>
                             </div>
                             <div class="product__item__text">
-                                <h6><a href="#">{{ product.name }}</a></h6>
+                                <h6><a href="{{ product.slug }}/{{ product.id }}">{{ product.name }}</a></h6>
                                 <h5>${{ product.productattribute_set.first.price }} </h5>
                             </div>
                         </div>
@@ -170,6 +182,7 @@
                 {% endfor %}
             </div>
         </div>
+        <script src="{% static 'main/assets/js/social_share.js' %}"></script>
     </section>
     <!-- Related Product Section End -->
 
