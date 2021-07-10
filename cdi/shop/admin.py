@@ -1,18 +1,18 @@
 from django.contrib import admin
-from .models import Category, Brand, Product, ProductAttribute
+from .models import Category, Brand, Product, ProductAttribute, CartOrder, CartOrderItems
 
 admin.site.register(Category)
 
 
 class BrandAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', ) #, 'image_tag'
+    list_display = ('id', 'name', )  # , 'image_tag'
 
 
 admin.site.register(Brand, BrandAdmin)
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name','category', 'brand', 'status', 'is_featured')
+    list_display = ('id', 'name', 'category', 'brand', 'status', 'is_featured')
     list_editable = ('status', 'is_featured')
 
 
@@ -27,3 +27,18 @@ class ProductAttributeAdmin(admin.ModelAdmin):
 admin.site.register(ProductAttribute, ProductAttributeAdmin)
 
 
+# Order
+class CartOrderAdmin(admin.ModelAdmin):
+    list_display = ('user', 'total_amt', 'paid_status', 'order_dt')
+
+
+admin.site.register(CartOrder, CartOrderAdmin)
+
+
+# OrderItems
+class CartOrderItemsAdmin(admin.ModelAdmin):
+    list_display = ('invoice_no', 'item',
+                    'image_tag', 'qty', 'price', 'total')
+
+
+admin.site.register(CartOrderItems, CartOrderItemsAdmin)

@@ -82,6 +82,9 @@ class CartOrder(models.Model):
     paid_status = models.BooleanField(default=False)
     order_dt = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        verbose_name_plural = '8. Orders'
+
 
 # Order Items
 class CartOrderItems(models.Model):
@@ -92,3 +95,9 @@ class CartOrderItems(models.Model):
     qty = models.IntegerField()
     price = models.FloatField()
     total = models.FloatField()
+
+    class Meta:
+        verbose_name_plural = '9. Order Items'
+
+    def image_tag(self):
+        return mark_safe('<img src="/media/%s" width="50" height="50" />' % self.image)
