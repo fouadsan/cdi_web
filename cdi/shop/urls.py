@@ -3,7 +3,7 @@ from django.urls import path, include
 
 
 from .views import home, product_detail, search, filter_data,\
-    load_more_data, cart_list, delete_cart_item, update_cart_item, checkout, payment_done, payment_cancelled
+    load_more_data, cart_list, delete_cart_item, update_cart_item, checkout, payment_done, payment_cancelled, save_review
 
 app_name = 'shop'
 
@@ -17,6 +17,8 @@ urlpatterns = [
     path('delete-from-cart', delete_cart_item, name='delete_from_cart'),
     path('update-cart', update_cart_item, name='update_cart'),
     path('checkout', checkout, name='checkout'),
+    path('save-review/<int:pid>', save_review, name='save_review'),
+
 
     # path('process-payment/', process_payment, name='process_payment'),
 

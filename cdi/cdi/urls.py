@@ -6,6 +6,8 @@ from django.conf.urls.static import static
 from shop.views import payment_cancelled, payment_done
 
 urlpatterns = [
+    path('jet/', include('jet.urls')),
+    path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('accounts/', include('django.contrib.auth.urls')),

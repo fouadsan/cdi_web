@@ -4,8 +4,9 @@ from django.http import JsonResponse, HttpResponse
 from django.core.paginator import Paginator
 from django.template.loader import render_to_string
 from django.db.models import Max, Min
-from .models import Category, Brand, Product, ProductAttribute, CartOrder, CartOrderItems
+from .models import Category, Brand, Product, ProductAttribute, CartOrder, CartOrderItems, ProductReview
 from django.contrib.auth.decorators import login_required
+from .forms import ReviewAdd
 
 # paypal
 from django.conf import settings
@@ -41,10 +42,12 @@ def product_detail(request, slug, _id):
     related_products = Product.objects.filter(
         category=queryset.category).exclude(id=_id)[:4]
     # exclude(id=id) :Exclude the current product
+    reviewForm = ReviewAdd()
     context = {
         'title': queryset.name,
         'data': queryset,
         'related_products': related_products,
+        'form': reviewForm
     }
     return render(request, 'shop/product-detail.html', context)
 
@@ -234,3 +237,16 @@ def payment_done(request):
 @csrf_exempt
 def payment_cancelled(request):
     return render(request, 'shop/payment-fail.html')
+
+
+# Save Review
+def save_review(request, pid):
+    product = Product.objects.get(pk=pid)
+    user = request.user
+    review = ProductReview.objects.create(
+        user=user,
+        product=product,
+        review_text=request.POST['review_text'],
+        review_rating=request.POST['review_rating'],
+    )
+    return JsonResponse({'bool': True})
