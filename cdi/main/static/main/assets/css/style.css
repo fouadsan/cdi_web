@@ -3661,3 +3661,10 @@ ackground: #1c1818;
 	}
 
 }
+
+
+/* LOGIN ERROR STYLE */
+
+.errorlist {
+	color: red;
+}

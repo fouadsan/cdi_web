@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-from google.oauth2 import service_account
+# from google.oauth2 import service_account
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'main',
     'shop',
-    'blog'
+    'blog',
+    'paypal.standard.ipn',
 
 ]
 
@@ -127,13 +128,18 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
-# storage
-GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-    os.path.join(BASE_DIR, 'crossroads-312221-0b5593c3472a.json')
-)
-DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-GS_BUCKET_NAME = 'cdi-images'
+LOGIN_REDIRECT_URL = 'main:home'
+LOGOUT_REDIRECT_URL = 'login'
+
+# # storage
+# GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+#     os.path.join(BASE_DIR, 'crossroads-312221-0b5593c3472a.json')
+# )
+# DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+# GS_BUCKET_NAME = 'cdi-images'
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -157,3 +163,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 mailchimp_api_key = "86f6d77c6af064e511a25cff745f253f-us19"
 mailchimp_server = "us19"
 mailchimp_list_id = "63868f3e69"
+
+PAYPAL_RECEIVER_EMAIL = 'fouadtest@gmail.com'
+PAYPAL_TEST = True

@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.html import mark_safe
+from django.contrib.auth.models import User
 
 
 class Category(models.Model):
@@ -17,7 +18,8 @@ class Category(models.Model):
 
 class Brand(models.Model):
     name = models.CharField(max_length=150, db_index=True, unique=True)
-    image = models.ImageField(blank=True, null=True, upload_to='images/brand_images/')
+    image = models.ImageField(blank=True, null=True,
+                              upload_to='images/brand_images/')
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -40,7 +42,7 @@ class Product(models.Model):
     category = models.ForeignKey(
         Category, related_name='products', on_delete=models.CASCADE, blank=True, null=True)
     brand = models.ForeignKey(
-     Brand, related_name='products', on_delete=models.CASCADE, blank=True, null=True)
+        Brand, related_name='products', on_delete=models.CASCADE, blank=True, null=True)
     status = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -71,3 +73,22 @@ class ProductAttribute(models.Model):
 
     def __str__(self):
         return self.product.name
+
+
+# Order
+class CartOrder(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    total_amt = models.FloatField()
+    paid_status = models.BooleanField(default=False)
+    order_dt = models.DateTimeField(auto_now_add=True)
+
+
+# Order Items
+class CartOrderItems(models.Model):
+    order = models.ForeignKey(CartOrder, on_delete=models.CASCADE)
+    invoice_no = models.CharField(max_length=150)
+    item = models.CharField(max_length=150)
+    image = models.CharField(max_length=200)
+    qty = models.IntegerField()
+    price = models.FloatField()
+    total = models.FloatField()

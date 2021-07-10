@@ -1,9 +1,19 @@
+from django.contrib.auth import login
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.core.paginator import Paginator
 from django.template.loader import render_to_string
 from django.db.models import Max, Min
 from .models import Category, Brand, Product, ProductAttribute
+from django.contrib.auth.decorators import login_required
+
+# paypal
+from django.conf import settings
+
+from django.urls import reverse
+
+from django.views.decorators.csrf import csrf_exempt
+from paypal.standard.forms import PayPalPaymentsForm
 
 
 def home(request):
@@ -28,7 +38,8 @@ def home(request):
 
 def product_detail(request, slug, _id):
     queryset = Product.objects.get(id=_id)
-    related_products = Product.objects.filter(category=queryset.category).exclude(id=_id)[:4]
+    related_products = Product.objects.filter(
+        category=queryset.category).exclude(id=_id)[:4]
     # exclude(id=id) :Exclude the current product
     context = {
         'title': queryset.name,
@@ -63,7 +74,8 @@ def filter_data(request):
     all_products = all_products.filter(productattribute__price__gte=min_price)
     all_products = all_products.filter(productattribute__price__lte=max_price)
     if len(categories) > 0:
-        all_products = all_products.filter(category_id__in=categories).distinct()
+        all_products = all_products.filter(
+            category_id__in=categories).distinct()
     if len(brands) > 0:
         all_products = all_products.filter(brand_id__in=brands).distinct()
     t = render_to_string('shop/ajax/product-list.html', {'data': all_products})
@@ -91,7 +103,8 @@ def add_to_cart(request):
     if 'cartdata' in request.session:
         if str(request.GET['id']) in request.session['cartdata']:
             cart_data = request.session['cartdata']
-            cart_data[str(request.GET['id'])]['qty'] = int(cart_p[str(request.GET['id'])]['qty'])
+            cart_data[str(request.GET['id'])]['qty'] = int(
+                cart_p[str(request.GET['id'])]['qty'])
             cart_data.update(cart_data)
             request.session['cartdata'] = cart_data
         else:
@@ -106,13 +119,24 @@ def add_to_cart(request):
 # Cart List Page
 def cart_list(request):
     total_amt = 0
-    for p_id, item in request.session['cartdata'].items():
-        total_amt += int(item['qty']) * float(item['price'])
-    context = {
-        'title': 'Shopping Cart',
-        'cart_data': request.session['cartdata'],
-        'totalitems': len(request.session['cartdata']), 'total_amt': total_amt
-    }
+    if 'cartdata' in request.session:
+        for p_id, item in request.session['cartdata'].items():
+            total_amt += int(item['qty']) * float(item['price'])
+        context = {
+            'title': 'Shopping Cart',
+            'cart_data': request.session['cartdata'],
+            'totalitems': len(request.session['cartdata']),
+            'total_amt': total_amt
+        }
+        return render(request, 'shop/cart.html', context)
+
+    else:
+        context = {
+            'title': 'Shopping Cart',
+            'cart_data': '',
+            'totalitems': 0,
+            'total_amt': total_amt
+        }
     return render(request, 'shop/cart.html', context)
 
 
@@ -146,5 +170,47 @@ def update_cart_item(request):
     for p_id, item in request.session['cartdata'].items():
         total_amt += int(item['qty'])*float(item['price'])
     t = render_to_string('shop/ajax/cart-list.html', {'cart_data': request.session['cartdata'],
-                                                 'totalitems': len(request.session['cartdata']), 'total_amt': total_amt})
+                                                      'totalitems': len(request.session['cartdata']), 'total_amt': total_amt})
     return JsonResponse({'data': t, 'totalitems': len(request.session['cartdata'])})
+
+
+# Checkout
+@login_required
+def checkout(request):
+    # Process Payment
+    order_id = '123'
+    host = request.get_host()
+    paypal_dict = {
+        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'amount': '123',
+        'item_name': 'Item Name',
+        'invoice': 'INV-123',
+        'currency_code': 'USD',
+        'notify_url': 'http://{}{}'.format(host, reverse('paypal-ipn')),
+        'return_url': 'http://{}{}'.format(host, reverse('payment_done')),
+        'cancel_return': 'http://{}{}'.format(host, reverse('payment_cancelled')),
+    }
+    form = PayPalPaymentsForm(initial=paypal_dict)
+    total_amt = 0
+    if 'cartdata' in request.session:
+        for p_id, item in request.session['cartdata'].items():
+            total_amt += int(item['qty']) * float(item['price'])
+        context = {
+            'title': 'Shopping Cart',
+            'cart_data': request.session['cartdata'],
+            'totalitems': len(request.session['cartdata']),
+            'total_amt': total_amt,
+            'form': form
+        }
+        return render(request, 'shop/checkout.html', context)
+
+
+@csrf_exempt
+def payment_done(request):
+    returnData = request.POST
+    return render(request, 'shoppayment-success.html', {'data': returnData})
+
+
+@csrf_exempt
+def payment_cancelled(request):
+    return render(request, 'shop/payment-fail.html')

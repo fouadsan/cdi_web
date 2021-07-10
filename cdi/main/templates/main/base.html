@@ -2,40 +2,42 @@
 {% load static %}
 {% url 'main:home' as home_url %}
 <html class="no-js" lang="zxx">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     {% if title %}
-        <title> CDI | {{ title }} </title>
+    <title> CDI | {{ title }} </title>
     {% else %}
-        <title> CDI </title>
+    <title> CDI </title>
     {% endif %}
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'main/assets/img/favicon.ico' %}">
 
-	<!-- CSS here -->
-	<link rel="stylesheet" href="{% static 'main/assets/css/bootstrap.min.css' %}">
-	<link rel="stylesheet" href="{% static 'main/assets/css/owl.carousel.min.css' %}">
-	<link rel="stylesheet" href="{% static 'main/assets/css/slicknav.css' %}">
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'main/assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'main/assets/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'main/assets/css/slicknav.css' %}">
     <link rel="stylesheet" href="{% static 'main/assets/css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'main/assets/css/hamburgers.min.css' %}">
     <link rel="stylesheet" href="{% static 'main/assets/css/gijgo.css' %}">
     <link rel="stylesheet" href="{% static 'main/assets/css/animate.min.css' %}">
     <link rel="stylesheet" href="{% static 'main/assets/css/animated-headline.css' %}">
-	<link rel="stylesheet" href="{% static 'main/assets/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'main/assets/css/magnific-popup.css' %}">
     <link rel="stylesheet" href="{% static 'main/assets/css/jquery-ui.min.css' %}" type="text/css">
-	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-	<link rel="stylesheet" href="{% static 'main/assets/css/themify-icons.css' %}">
-	<link rel="stylesheet" href="{% static 'main/assets/css/slick.css' %}">
-	<link rel="stylesheet" href="{% static 'main/assets/css/nice-select.css' %}">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static 'main/assets/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'main/assets/css/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'main/assets/css/nice-select.css' %}">
     <link rel="stylesheet" href="{% static 'main/assets/css/elegant-icons.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'main/assets/css/xzoom.css' %}">
     <link type="text/css" rel="stylesheet" media="all" href="{% static 'main/assets/css/magnific-popup.css' %}" />
-	<link rel="stylesheet" href="{% static 'main/assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'main/assets/css/style.css' %}">
 
 </head>
+
 <body>
     <!-- Page Preloder -->
     <div id="preloder">
@@ -47,16 +49,16 @@
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
             {% if request.get_full_path == home_url %}
-                <a href="#header"><img src="{% static 'main/assets/img/logo/logo.png' %}" alt=""></a>
+            <a href="#header"><img src="{% static 'main/assets/img/logo/logo.png' %}" alt=""></a>
             {% else %}
-                <a href="{{ home_url }}"><img src="{% static 'main/assets/img/logo/logo.png' %}" alt=""></a>
+            <a href="{{ home_url }}"><img src="{% static 'main/assets/img/logo/logo.png' %}" alt=""></a>
             {% endif %}
         </div>
         <div class="humberger__menu__cart">
             <ul>
                 <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
                 <li><a href="#"><i class="fa fa-shopping-bag"></i>
-                    <span class="cart-list">{{ request.session.cartdata|length }}</span></a></li>
+                        <span class="cart-list">{{ request.session.cartdata|length }}</span></a></li>
             </ul>
         </div>
         <div class="humberger__menu__widget">
@@ -70,15 +72,15 @@
                 </ul>
             </div>
             <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
+                <a href="#"><i class="fa fa-user"></i> My Account</a>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
                 {% if request.get_full_path == home_url %}
-                    <li class="active"><a href="#header">Home</a></li>
+                <li class="active"><a href="#header">Home</a></li>
                 {% else %}
-                    <li><a href="{{ home_url }}">Home</a></li>
+                <li><a href="{{ home_url }}">Home</a></li>
                 {% endif %}
                 <li><a href="{% url 'shop:home' %}">Shop</a>
                     <ul class="header__menu__dropdown">
@@ -89,20 +91,20 @@
                     </ul>
                 </li>
                 {% if request.get_full_path == home_url %}
-                    <li><a href="#about">About</a></li>
+                <li><a href="#about">About</a></li>
                 {% else %}
-                    <li><a href="{{ home_url }}">About</a></li>
+                <li><a href="{{ home_url }}">About</a></li>
                 {% endif %}
                 {% if request.get_full_path == home_url %}
-                    <li><a href="#services">Services</a></li>
+                <li><a href="#services">Services</a></li>
                 {% else %}
-                     <li><a href="{{ home_url }}">Services</a></li>
+                <li><a href="{{ home_url }}">Services</a></li>
                 {% endif %}
                 <li><a href="{% url 'blog:blogs' %}">Blog</a></li>
                 {% if request.get_full_path == home_url %}
-                    <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact">Contact</a></li>
                 {% else %}
-                    <li><a href="{{ home_url }}">Contact</a></li>
+                <li><a href="{{ home_url }}">Contact</a></li>
                 {% endif %}
             </ul>
         </nav>
@@ -138,10 +140,11 @@
                                 <li>
                                     <a><i class="fa fa-home fa-2x"></i> &nbsp;Sat - Fri 08:00 - 16:00 &nbsp;</a>
                                     {% if is_open %}
-                                        <a class="store-open"> &nbsp;Open</a></li>
-                                    {% else %}
-                                        <a class="store-closed"> &nbsp;Closed</a></li>
-                                    {% endif %}
+                                    <a class="store-open"> &nbsp;Open</a>
+                                </li>
+                                {% else %}
+                                <a class="store-closed"> &nbsp;Closed</a></li>
+                                {% endif %}
                                 </li>
                             </ul>
                         </div>
@@ -169,7 +172,20 @@
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-user"></i> My Account
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        {% if user.is_authenticated %}
+                                        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                                        {% else %}
+                                        <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+                                        <a class="dropdown-item" href="#">Signup</a>
+                                        {% endif %}
+                                    </div>
+                                </li>
                             </div>
                         </div>
                     </div>
@@ -180,11 +196,11 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                         <div class="humberger__menu__logo">
+                        <div class="humberger__menu__logo">
                             {% if request.get_full_path == home_url %}
-                                <a href="#header"><img src="{% static 'main/assets/img/logo/logo.png' %}" alt=""></a>
+                            <a href="#header"><img src="{% static 'main/assets/img/logo/logo.png' %}" alt=""></a>
                             {% else %}
-                                <a href="{{ home_url }}"><img src="{% static 'main/assets/img/logo/logo.png' %}" alt=""></a>
+                            <a href="{{ home_url }}"><img src="{% static 'main/assets/img/logo/logo.png' %}" alt=""></a>
                             {% endif %}
                         </div>
                     </div>
@@ -194,9 +210,9 @@
                         <ul>
                             {% url 'main:home' as home_url %}
                             {% if request.get_full_path == home_url %}
-                                <li class="active"><a href="#header">Home</a></li>
+                            <li class="active"><a href="#header">Home</a></li>
                             {% else %}
-                                <li><a href="{{ home_url }}">Home</a></li>
+                            <li><a href="{{ home_url }}">Home</a></li>
                             {% endif %}
                             <li><a href="{% url 'shop:home' %}">Shop</a>
                                 <ul class="header__menu__dropdown">
@@ -207,20 +223,20 @@
                                 </ul>
                             </li>
                             {% if request.get_full_path == home_url %}
-                                <li><a href="#about">About</a></li>
+                            <li><a href="#about">About</a></li>
                             {% else %}
-                                <li><a href="{{ home_url }}">About</a></li>
+                            <li><a href="{{ home_url }}">About</a></li>
                             {% endif %}
                             {% if request.get_full_path == home_url %}
-                                <li><a href="#services">Services</a></li>
+                            <li><a href="#services">Services</a></li>
                             {% else %}
-                                 <li><a href="{{ home_url }}">Services</a></li>
+                            <li><a href="{{ home_url }}">Services</a></li>
                             {% endif %}
                             <li><a href="{% url 'blog:blogs' %}">Blog</a></li>
                             {% if request.get_full_path == home_url %}
-                                <li><a href="#contact">Contact</a></li>
+                            <li><a href="#contact">Contact</a></li>
                             {% else %}
-                                <li><a href="{{ home_url }}">Contact</a></li>
+                            <li><a href="{{ home_url }}">Contact</a></li>
                             {% endif %}
                         </ul>
                     </nav>
@@ -230,7 +246,7 @@
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
                             <li><a href="{% url 'shop:cart' %}"><i class="fa fa-shopping-bag"></i>
-                                <span class="cart-list">{{ request.session.cartdata|length }}</span></a></li>
+                                    <span class="cart-list">{{ request.session.cartdata|length }}</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -287,7 +303,8 @@
 
     <footer>
         <!-- Footer Start-->
-        <div class="footer-area footer-padding section-bg" data-background="{% static 'main/assets/img/gallery/footer_bg.png' %}">
+        <div class="footer-area footer-padding section-bg"
+            data-background="{% static 'main/assets/img/gallery/footer_bg.png' %}">
             <div class="container">
                 <!-- Footer Top -->
                 <div class="footer-top">
@@ -297,11 +314,13 @@
                                 <div class="single-footer-caption mb-30">
                                     <!-- logo -->
                                     <div class="footer-logo">
-                                        <a href="#header"><img src="{% static 'main/assets/img/logo/logo2_footer.png' %}" alt=""></a>
+                                        <a href="#header"><img
+                                                src="{% static 'main/assets/img/logo/logo2_footer.png' %}" alt=""></a>
                                     </div>
                                     <div class="footer-tittle">
                                         <div class="footer-pera">
-                                            <p>Consectetur adipisicinhg cvelicsed do eiusmod tempor inciducvccnt ut labosvrer adipisic.</p>
+                                            <p>Consectetur adipisicinhg cvelicsed do eiusmod tempor inciducvccnt ut
+                                                labosvrer adipisic.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -315,7 +334,7 @@
                                         <li><a href="#about">About</a></li>
                                         <li><a href="#"> Offers & Discounts</a></li>
                                         <li><a href="#"> Get Coupon</a></li>
-                                        <li><a href="#">  Contact Us</a></li>
+                                        <li><a href="#"> Contact Us</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -354,7 +373,10 @@
                         <div class="col-xl-7 col-lg-8 col-md-7">
                             <div class="footer-copy-right">
                                 <p>
-                                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Developed by <a href="https://fouadben.herokuapp.com/" target="_blank">Fouad Benayad</a>
+                                    Copyright &copy;
+                                    <script>document.write(new Date().getFullYear());</script> All rights reserved |
+                                    Developed by <a href="https://fouadben.herokuapp.com/" target="_blank">Fouad
+                                        Benayad</a>
                                 </p>
                             </div>
                         </div>
@@ -363,7 +385,8 @@
                                 <!-- social -->
                                 <div class="footer-social">
                                     <a href="#"><i class="fab fa-twitter" title="Twitter" target="_blank"></i></a>
-                                    <a href="https://www.facebook.com/sai4ull" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="https://www.facebook.com/sai4ull" title="Facebook" target="_blank"><i
+                                            class="fab fa-facebook-f"></i></a>
                                     <a href="#"><i class="fab fa-behance"></i></a>
                                     <a href="#"><i class="fas fa-globe"></i></a>
                                 </div>
@@ -376,7 +399,7 @@
         <!-- Footer End-->
     </footer>
     <!-- Scroll Up -->
-    <div id="back-top" >
+    <div id="back-top">
         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
     </div>
 
@@ -429,4 +452,5 @@
     <script src="{% static 'main/assets/js/custom.js' %}"></script>
 
 </body>
+
 </html>

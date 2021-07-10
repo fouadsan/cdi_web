@@ -1,8 +1,9 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+
 
 from .views import home, product_detail, search, filter_data,\
-    load_more_data, cart_list, delete_cart_item, update_cart_item
+    load_more_data, cart_list, delete_cart_item, update_cart_item, checkout, payment_done, payment_cancelled
 
 app_name = 'shop'
 
@@ -15,5 +16,9 @@ urlpatterns = [
     path('cart', cart_list, name='cart'),
     path('delete-from-cart', delete_cart_item, name='delete_from_cart'),
     path('update-cart', update_cart_item, name='update_cart'),
+    path('checkout', checkout, name='checkout'),
+
+    # path('process-payment/', process_payment, name='process_payment'),
+
 
 ]
