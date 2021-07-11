@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.core.paginator import Paginator
 from django.template.loader import render_to_string
-from django.db.models import Max, Min
+from django.db.models import Max, Min, Avg
 from .models import Category, Brand, Product, ProductAttribute, CartOrder, CartOrderItems, ProductReview
 from django.contrib.auth.decorators import login_required
 from .forms import ReviewAdd
@@ -41,13 +41,32 @@ def product_detail(request, slug, _id):
     queryset = Product.objects.get(id=_id)
     related_products = Product.objects.filter(
         category=queryset.category).exclude(id=_id)[:4]
-    # exclude(id=id) :Exclude the current product
+
     reviewForm = ReviewAdd()
+
+    canAdd = True
+    reviewCheck = ProductReview.objects.filter(
+        user=request.user, product=queryset).count()
+    if request.user.is_authenticated:
+        if reviewCheck > 0:
+            canAdd = False
+
+    reviews = ProductReview.objects.filter(product=queryset)
+
+    # Fetch avg rating for reviews
+    avg_reviews = ProductReview.objects.filter(
+        product=queryset).aggregate(avg_rating=Avg('review_rating'))
+    # End
+
     context = {
         'title': queryset.name,
         'data': queryset,
         'related_products': related_products,
-        'form': reviewForm
+        'form': reviewForm,
+        'canAdd': canAdd,
+        'reviews': reviews,
+        'avg_reviews': avg_reviews
+
     }
     return render(request, 'shop/product-detail.html', context)
 
@@ -249,4 +268,14 @@ def save_review(request, pid):
         review_text=request.POST['review_text'],
         review_rating=request.POST['review_rating'],
     )
-    return JsonResponse({'bool': True})
+    data = {
+        'user': user.username,
+        'review_text': request.POST['review_text'],
+        'review_rating': request.POST['review_rating']
+    }
+    context = {
+        'bool': True,
+        'data': data
+    }
+
+    return JsonResponse(context)
