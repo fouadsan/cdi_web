@@ -273,9 +273,16 @@ def save_review(request, pid):
         'review_text': request.POST['review_text'],
         'review_rating': request.POST['review_rating']
     }
+
+    # Fetch avg rating for reviews
+    avg_reviews = ProductReview.objects.filter(
+        product=product).aggregate(avg_rating=Avg('review_rating'))
+    # End
+
     context = {
         'bool': True,
-        'data': data
+        'data': data,
+        'avg_reviews': avg_reviews
     }
 
     return JsonResponse(context)
