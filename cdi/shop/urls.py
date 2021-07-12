@@ -2,8 +2,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 
-from .views import home, product_detail, search, filter_data,\
-    load_more_data, cart_list, delete_cart_item, update_cart_item, checkout, payment_done, payment_cancelled, save_review, my_dashboard, my_orders, my_order_items
+from .views import add_wishlist, home, product_detail, search, filter_data,\
+    load_more_data, cart_list, delete_cart_item, update_cart_item, checkout, save_review, my_dashboard, my_orders, my_order_items,\
+    add_wishlist, my_wishlist
 
 app_name = 'shop'
 
@@ -23,7 +24,9 @@ urlpatterns = [
     path('my-orders', my_orders, name='my_orders'),
     path('my-order-items/<int:id>', my_order_items, name='my_order_items'),
     # End
-
+    # Wishlist
+    path('wishlist', add_wishlist, name='wishlist'),
+    path('my-wishlist', my_wishlist, name='my_wishlist'),
 
     # path('process-payment/', process_payment, name='process_payment'),
 

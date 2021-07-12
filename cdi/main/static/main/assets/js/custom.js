@@ -152,6 +152,26 @@ $(document).ready(function () {
 	});
 	//End
 
+	// Add Wishlist
+	$(".add-wishlist").on('click', function () {
+		var _pid = $(this).data('product');
+		var _vm = $(this);
+		$.ajax({
+			url: "wishlist",
+			data: {
+				product: _pid
+			},
+			dataType: 'json',
+			success: function (res) {
+				if (res.bool == true) {
+					_vm.addClass('disabled').removeClass('add-wishlist');
+				}
+				console.log(res.bool)
+			}
+		})
+	})
+	//End
+
 });
 
 

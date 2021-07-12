@@ -1,126 +1,137 @@
 {% extends 'main/base2.html' %}
 {% load static %}
 {% block content2 %}
-    <!-- Product Section Begin -->
-    <section class="product spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-5">
-                    {% include 'shop/filters.html' %}
-                </div>
-                <div class="col-lg-9 col-md-7">
-                    {% if products %}
-                        <div class="product__discount">
-                            <div class="section-title product__discount__title">
-                                <h2>Sale Off</h2>
-                            </div>
-                            <div class="row">
-                                <div class="product__discount__slider owl-carousel">
-                                    {% for feat_product in feat_products %}
-                                        <div class="col-lg-4">
-                                            <div class="product__discount__item">
-                                                <div class="product__discount__item__pic set-bg">
-                                                    <img src="{{ feat_product.productattribute_set.first.image_url1 }}" alt="">
-                                                    <div class="product__discount__percent">-20%</div>
-                                                    <ul class="product__item__pic__hover">
-                                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="product__discount__item__text">
-                                                    <span>{{feat_product.category.name }}</span>
-                                                    <h5><a href="#">{{feat_product.name }}</a></h5>
-                                                    <div class="product__item__price">${{ feat_product.productattribute_set.first.price }} <span>$36.00</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="filter__item">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-5">
-                                    <div class="filter__sort">
-                                        <span>Sort By</span>
-                                        <select>
-                                            <option value="0">Default</option>
-                                            <option value="0">Default</option>
-                                        </select>
+<!-- Product Section Begin -->
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-5">
+                {% include 'shop/filters.html' %}
+            </div>
+            <div class="col-lg-9 col-md-7">
+                {% if products %}
+                <div class="product__discount">
+                    <div class="section-title product__discount__title">
+                        <h2>Sale Off</h2>
+                    </div>
+                    <div class="row">
+                        <div class="product__discount__slider owl-carousel">
+                            {% for feat_product in feat_products %}
+                            <div class="col-lg-4">
+                                <div class="product__discount__item">
+                                    <div class="product__discount__item__pic set-bg">
+                                        <img src="{{ feat_product.productattribute_set.first.image_url1 }}" alt="">
+                                        <div class="product__discount__percent">-20%</div>
+                                        <ul class="product__item__pic__hover">
+                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        </ul>
                                     </div>
-                                </div>
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="filter__found">
-                                        <h6><span>16</span> Products found</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-3">
-                                    <div class="filter__option">
-                                        <span class="icon_grid-2x2"></span>
-                                        <span class="icon_ul"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" id="filteredProducts">
-                            <p class="ajaxLoader">Loading...</p>
-                            {% for data in products %}
-                                <div class="col-lg-4 col-md-6 col-sm-6 product-box">
-                                    <div class="product__item">
-                                        <div class="product__item__pic set-bg">
-                                            <input type="hidden" class="product-id-{{ data.id }}" value="{{ data.id }}">
-                                            <input type="hidden" class="product-name-{{ data.id }}" value="{{ data.name }}">
-                                            <input type="hidden" id="productQty" value="1">
-                                            <input type="hidden" class="product-image-{{ data.id }}"
-                                                   value="{{ data.productattribute_set.first.image_url1 }}" />
-                                            <img src="{{ data.productattribute_set.first.image_url1 }}" alt="">
-                                            <ul class="product__item__pic__hover">
-                                                <li>
-                                                    <button href="#">
-                                                        <i class="fa fa-heart"></i>
-                                                        <span>Wishlist</span>
-                                                    </button>
-                                                </li>
-                                                <li>
-                                                    <button href="#">
-                                                        <i class="fa fa-eye"></i>
-                                                        <span>View</span>
-                                                    </button>
-                                                </li>
-                                                <li>
-                                                    <button type="button">
-                                                        <i class="fa fa-shopping-cart"  id="addToCartBtn" data-item="{{ data.id }}"></i>
-                                                        <span>Cart</span>
-                                                    </button>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="product__item__text">
-                                            <h6>
-                                                <a href="{{ data.slug }}/{{ data.id }}">{{ data.name }}</a>
-                                            </h6>
-                                            <h5 class="product__details__price">$
-                                                <span class="product-price-{{data.id }}">
-                                                    {{ data.productattribute_set.first.price }}
-                                                </span>
-                                            </h5>
+                                    <div class="product__discount__item__text">
+                                        <span>{{feat_product.category.name }}</span>
+                                        <h5><a href="#">{{feat_product.name }}</a></h5>
+                                        <div class="product__item__price">
+                                            ${{feat_product.productattribute_set.first.price }}
+                                            <span>$36.00</span>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             {% endfor %}
                         </div>
-                    {% else %}
-                        <h1>No data found.</h1>
-                    {% endif %}
-                     <div class="row justify-content-center">
-                        <button id="loadMore" data-total="{{ total_data }}" data-limit="3" class="boxed-btn">
-                            Load More <i class="fa fa-sync load-more-icon"></i></button>
                     </div>
+                </div>
+                <div class="filter__item">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-5">
+                            <div class="filter__sort">
+                                <span>Sort By</span>
+                                <select>
+                                    <option value="0">Default</option>
+                                    <option value="0">Default</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="filter__found">
+                                <h6><span>16</span> Products found</h6>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-3">
+                            <div class="filter__option">
+                                <span class="icon_grid-2x2"></span>
+                                <span class="icon_ul"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="filteredProducts">
+                    <p class="ajaxLoader">Loading...</p>
+                    {% for data in products %}
+                    <div class="col-lg-4 col-md-6 col-sm-6 product-box">
+                        <div class="product__item">
+                            <div class="product__item__pic set-bg">
+                                <input type="hidden" class="product-id-{{ data.id }}" value="{{ data.id }}">
+                                <input type="hidden" class="product-name-{{ data.id }}" value="{{ data.name }}">
+                                <input type="hidden" id="productQty" value="1">
+                                <input type="hidden" class="product-image-{{ data.id }}"
+                                    value="{{ data.productattribute_set.first.image_url1 }}" />
+                                <img src="{{ data.productattribute_set.first.image_url1 }}" alt="">
+                                <ul class="product__item__pic__hover">
+
+                                    <li>
+                                        {% if user.is_authenticated %}
+                                        <button href="#" class="add-wishlist" data-product="{{ data.id }}">
+                                            <i class="fa fa-heart"></i>
+                                            <span>Wishlist</span>
+                                        </button>
+                                        {% else %}
+                                        <button href="#" class="disabled">
+                                            <i class="fa fa-heart"></i>
+                                            <span>disabled</span>
+                                        </button>
+                                        {% endif %}
+                                    </li>
+                                    <li>
+                                        <button href="#">
+                                            <i class="fa fa-eye"></i>
+                                            <span>View</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button">
+                                            <i class="fa fa-shopping-cart" id="addToCartBtn"
+                                                data-item="{{ data.id }}"></i>
+                                            <span>Cart</span>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="product__item__text">
+                                <h6>
+                                    <a href="{{ data.slug }}/{{ data.id }}">{{ data.name }}</a>
+                                </h6>
+                                <h5 class="product__details__price">$
+                                    <span class="product-price-{{data.id }}">
+                                        {{ data.productattribute_set.first.price }}
+                                    </span>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <h1>No data found.</h1>
+                {% endif %}
+                <div class="row justify-content-center">
+                    <button id="loadMore" data-total="{{ total_data }}" data-limit="3" class="boxed-btn">
+                        Load More <i class="fa fa-sync load-more-icon"></i></button>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Product Section End -->
+    </div>
+</section>
+<!-- Product Section End -->
 {% endblock content2 %}
-

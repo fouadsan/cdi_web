@@ -5,6 +5,8 @@
     <a href="{% url 'shop:my_orders' %}"
         class="list-group-item {% if request.path == '/shop/my-orders' %} active {% endif %}"
         style="color: black;">Orders</a>
-    <a href="#" class="list-group-item" style="color: black;">Wishlist</a>
+    <a href="{% url 'shop:my_wishlist' %}"
+        class="list-group-item {% if request.path == '/shop/my-wishlist' %} active {% endif %}"
+        style="color: black;">Wishlist</a>
     <a href="{% url 'logout' %}" class="text-danger list-group-item">Logout</a>
 </div>

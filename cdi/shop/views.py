@@ -4,7 +4,7 @@ from django.http import JsonResponse, HttpResponse
 from django.core.paginator import Paginator
 from django.template.loader import render_to_string
 from django.db.models import Max, Min, Avg
-from .models import Category, Brand, Product, ProductAttribute, CartOrder, CartOrderItems, ProductReview
+from .models import Category, Brand, Product, ProductAttribute, CartOrder, CartOrderItems, ProductReview, Wishlist
 from django.contrib.auth.decorators import login_required
 from .forms import ReviewAdd
 
@@ -304,3 +304,31 @@ def my_order_items(request, id):
     order = CartOrder.objects.get(pk=id)
     orderitems = CartOrderItems.objects.filter(order=order).order_by('-id')
     return render(request, 'shop/user/order-items.html', {'orderitems': orderitems})
+
+
+def add_wishlist(request):
+    pid = request.GET['product']
+    product = Product.objects.get(pk=pid)
+    data = {}
+    checkw = Wishlist.objects.filter(
+        product=product,
+        user=request.user).count()
+    if checkw > 0:
+        data = {
+            'bool': False
+        }
+    else:
+        wishlist = Wishlist.objects.create(
+            product=product,
+            user=request.user
+        )
+        data = {
+            'bool': True
+        }
+    return JsonResponse(data)
+
+
+# My Wishlist
+def my_wishlist(request):
+    wlist = Wishlist.objects.filter(user=request.user).order_by('-id')
+    return render(request, 'shop/user/wishlist.html', {'wlist': wlist})
