@@ -286,3 +286,21 @@ def save_review(request, pid):
     }
 
     return JsonResponse(context)
+
+
+# User Dashboard
+def my_dashboard(request):
+    return render(request, 'shop/user/dashboard.html')
+
+
+# My Orders
+def my_orders(request):
+    orders = CartOrder.objects.filter(user=request.user).order_by('-id')
+    return render(request, 'shop/user/orders.html', {'orders': orders})
+
+
+# Order Detail
+def my_order_items(request, id):
+    order = CartOrder.objects.get(pk=id)
+    orderitems = CartOrderItems.objects.filter(order=order).order_by('-id')
+    return render(request, 'shop/user/order-items.html', {'orderitems': orderitems})
