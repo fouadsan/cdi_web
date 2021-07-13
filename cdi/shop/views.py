@@ -332,3 +332,9 @@ def add_wishlist(request):
 def my_wishlist(request):
     wlist = Wishlist.objects.filter(user=request.user).order_by('-id')
     return render(request, 'shop/user/wishlist.html', {'wlist': wlist})
+
+
+# My Reviews
+def my_reviews(request):
+    reviews = ProductReview.objects.filter(user=request.user).order_by('-id')
+    return render(request, 'shop/user/reviews.html', {'reviews': reviews})
