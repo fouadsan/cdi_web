@@ -362,3 +362,12 @@ def save_address(request):
         'form': form
     }
     return render(request, 'shop/user/add-address.html', context)
+
+
+# Activate Address
+def activate_address(request):
+    a_id = str(request.GET['id'])
+    UserAddressBook.objects.update(status=False)
+    UserAddressBook.objects.filter(id=a_id).update(status=True)
+
+    return JsonResponse({'bool': True})

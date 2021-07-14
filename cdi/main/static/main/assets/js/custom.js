@@ -149,6 +149,9 @@ $(document).ready(function () {
 			}
 		});
 		e.preventDefault();
+
+
+
 	});
 	//End
 
@@ -171,6 +174,35 @@ $(document).ready(function () {
 		})
 	})
 	//End
+
+	// Activate Selected Address
+	$(document).on('click', '.activate-address', function () {
+		var _aId = $(this).attr('data-address');
+		var _vm = $(this);
+		// Ajax
+		$.ajax({
+			url: 'activate-address',
+			data: {
+				'id': _aId,
+			},
+			dataType: 'json',
+			beforeSend: function () {
+				_vm.attr('disabled', true);
+			},
+			success: function (res) {
+				if (res.bool == true) {
+					$(".address").removeClass('shadow border-secondaryy');
+					$(".address" + _aId).addClass('shadow border-secondary');
+					$(".check").hide();
+					$(".actbtn").show();
+					$(".check" + _aId).show();
+					$(".btn" + _aId).hide();
+				}
+			}
+		}
+		);
+		// End
+	});
 
 });
 
