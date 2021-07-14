@@ -168,3 +168,5 @@ mailchimp_list_id = "63868f3e69"
 
 PAYPAL_RECEIVER_EMAIL = 'fouadtest@gmail.com'
 PAYPAL_TEST = True
+
+JET_SIDE_MENU_COMPACT = True

@@ -4,7 +4,7 @@ from django.urls import path, include
 
 from .views import add_wishlist, home, product_detail, search, filter_data,\
     load_more_data, cart_list, delete_cart_item, update_cart_item, checkout, save_review, my_dashboard, my_orders, my_order_items,\
-    add_wishlist, my_wishlist, my_reviews
+    add_wishlist, my_wishlist, my_reviews, my_addressbook, save_address
 
 app_name = 'shop'
 
@@ -29,6 +29,9 @@ urlpatterns = [
     path('my-wishlist', my_wishlist, name='my_wishlist'),
     # My Reviews
     path('my-reviews', my_reviews, name='my_reviews'),
+    # My AddressBook
+    path('my-addressbook', my_addressbook, name='my_addressbook'),
+    path('add-address', save_address, name='add_address'),
 
 
 

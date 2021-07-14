@@ -76,11 +76,20 @@ class ProductAttribute(models.Model):
 
 
 # Order
+status_choice = (
+    ('process', 'In Process'),
+    ('shipped', 'Shipped'),
+    ('delivered', 'Delivered')
+)
+
+
 class CartOrder(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     total_amt = models.FloatField()
     paid_status = models.BooleanField(default=False)
     order_dt = models.DateTimeField(auto_now_add=True)
+    order_status = models.CharField(
+        max_length=150, choices=status_choice, default='process')
 
     class Meta:
         verbose_name_plural = '8. Orders'
@@ -122,8 +131,24 @@ class ProductReview(models.Model):
     def get_review_rating(self):
         return self.review_rating
 
+    class Meta:
+        verbose_name_plural = 'Reviews'
 
-# Whshhlist
+
+# Wishlist
 class Wishlist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name_plural = 'Wishlist'
+
+
+# AdressBook
+class UserAddressBook(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    address = models.TextField()
+    status = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name_plural = 'AddressBook'

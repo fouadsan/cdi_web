@@ -11,5 +11,8 @@
     <a href="{% url 'shop:my_reviews' %}"
         class="list-group-item {% if request.path == '/shop/my-reviews' %} active {% endif %}" style="color: black;">My
         Reviews</a>
+    <a href="{% url 'shop:my_addressbook' %}"
+        class="list-group-item {% if request.path == '/shop/my-addressbook' %} active {% endif %}"
+        style="color: black;">Address Book</a>
     <a href="{% url 'logout' %}" class="text-danger list-group-item">Logout</a>
 </div>

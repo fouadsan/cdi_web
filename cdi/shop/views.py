@@ -4,9 +4,9 @@ from django.http import JsonResponse, HttpResponse
 from django.core.paginator import Paginator
 from django.template.loader import render_to_string
 from django.db.models import Max, Min, Avg
-from .models import Category, Brand, Product, ProductAttribute, CartOrder, CartOrderItems, ProductReview, Wishlist
+from .models import Category, Brand, Product, ProductAttribute, CartOrder, CartOrderItems, ProductReview, Wishlist, UserAddressBook
 from django.contrib.auth.decorators import login_required
-from .forms import ReviewAdd
+from .forms import ReviewAdd, AddressBookForm
 
 # paypal
 from django.conf import settings
@@ -338,3 +338,27 @@ def my_wishlist(request):
 def my_reviews(request):
     reviews = ProductReview.objects.filter(user=request.user).order_by('-id')
     return render(request, 'shop/user/reviews.html', {'reviews': reviews})
+
+
+# My Addressbook
+def my_addressbook(request):
+    addbook = UserAddressBook.objects.filter(user=request.user).order_by('-id')
+    return render(request, 'shop/user/addressbook.html', {'addbook': addbook})
+
+
+# Save AddressBook
+def save_address(request):
+    msg = None
+    if request.method == 'POST':
+        form = AddressBookForm(request.POST)
+        if form.is_valid():
+            saveForm = form.save(commit=False)
+            saveForm.user = request.user
+            saveForm.save()
+            msg = 'Data has been saved'
+    form = AddressBookForm
+    context = {
+        'msg': msg,
+        'form': form
+    }
+    return render(request, 'shop/user/add-address.html', context)
