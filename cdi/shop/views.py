@@ -236,13 +236,15 @@ def checkout(request):
                 'cancel_return': 'http://{}{}'.format(host, reverse('payment_cancelled')),
             }
             form = PayPalPaymentsForm(initial=paypal_dict)
-
+            address = UserAddressBook.objects.filter(
+                user=request.user, status=True).first()
         context = {
             'title': 'Shopping Cart',
             'cart_data': request.session['cartdata'],
             'totalitems': len(request.session['cartdata']),
             'total_amt': total_amt,
-            'form': form
+            'form': form,
+            'address': address
         }
         return render(request, 'shop/checkout.html', context)
 
