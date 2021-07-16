@@ -14,10 +14,13 @@
             <div class="row">
                 {% for add in addbook %}
                 <div class="col-md-4">
+                    <a href="{% url 'shop:update_address' add.id %}" class="float-right"><i class="fa fa-edit"
+                            style="color: blue;"></i></a>
                     <div
-                        class="card {% if add.status %} border-secondary shadow {% endif %} address{{ add.id }} address">
+                        class="card mb-3 {% if add.status %} border-secondary shadow {% endif %} address{{ add.id }} address">
                         <div class="card-body">
-                            {{ add.address }}
+                            <p class="card-text">{{ add.address }}</p>
+                            <p class="card-text">{{ add.mobile }}</p>
                         </div>
                         {% if add.status %}
                         <div class="card-footer">
@@ -27,11 +30,13 @@
                                 style="display: none;">Activate</button>
                         </div>
                         {% else %}
+
                         <div class="card-footer footer{{ add.id }}">
                             <i class="fa fa-check-circle text-success check{{ add.id }} check"
                                 style="display: none;"></i>
                             <button data-address="{{ add.id }}"
                                 class="btn btn-sm btn-info activate-address btn{{add.id}} actbtn">Activate</button>
+
                         </div>
                         {% endif %}
                     </div>

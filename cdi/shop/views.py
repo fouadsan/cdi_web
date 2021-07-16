@@ -1,9 +1,11 @@
+import calendar
 from django.contrib.auth import login
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.core.paginator import Paginator
 from django.template.loader import render_to_string
-from django.db.models import Max, Min, Avg
+from django.db.models import Max, Min, Avg, Count
+from django.db.models.functions import ExtractMonth
 from .models import Category, Brand, Product, ProductAttribute, CartOrder, CartOrderItems, ProductReview, Wishlist, UserAddressBook
 from django.contrib.auth.decorators import login_required
 from .forms import ReviewAdd, AddressBookForm
@@ -291,8 +293,23 @@ def save_review(request, pid):
 
 
 # User Dashboard
+
+
 def my_dashboard(request):
-    return render(request, 'shop/user/dashboard.html')
+    orders = CartOrder.objects.annotate(month=ExtractMonth('order_dt')).values(
+        'month').annotate(count=Count('id')).values('month', 'count')
+
+    month_number = []
+    total_orders = []
+    for d in orders:
+        month_number.append(calendar.month_name[d['month']])
+        total_orders.append(d['count'])
+
+    context = {
+        'month_number': month_number,
+        'total_orders': total_orders
+    }
+    return render(request, 'shop/user/dashboard.html', context)
 
 
 # My Orders
@@ -356,6 +373,8 @@ def save_address(request):
         if form.is_valid():
             saveForm = form.save(commit=False)
             saveForm.user = request.user
+            if 'status' in request.POST:
+                UserAddressBook.objects.update(status=False)
             saveForm.save()
             msg = 'Data has been saved'
     form = AddressBookForm
@@ -373,3 +392,24 @@ def activate_address(request):
     UserAddressBook.objects.filter(id=a_id).update(status=True)
 
     return JsonResponse({'bool': True})
+
+
+# Update AddressBook
+def update_address(request, id):
+    address = UserAddressBook.objects.get(pk=id)
+    msg = None
+    if request.method == 'POST':
+        form = AddressBookForm(request.POST, instance=address)
+        if form.is_valid():
+            saveForm = form.save(commit=False)
+            saveForm.user = request.user
+            if 'status' in request.POST:
+                UserAddressBook.objects.update(status=False)
+            saveForm.save()
+            msg = 'Data has been saved'
+    form = AddressBookForm(instance=address)
+    context = {
+        'msg': msg,
+        'form': form
+    }
+    return render(request, 'shop/user/update-address.html', context)

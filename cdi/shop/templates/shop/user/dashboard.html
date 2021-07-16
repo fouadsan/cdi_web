@@ -16,4 +16,29 @@
         </div>
     </div>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script type="text/javascript">
+    const labels = {{ month_number| safe }};
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Orders By Month',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: {{ total_orders }},
+        }]
+    };
+
+    const config = {
+        type: 'bar',
+        data,
+        options: {}
+    };
+
+    var myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+</script>
 {% endblock %}

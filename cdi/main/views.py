@@ -5,7 +5,7 @@ from .forms import ContactUs
 from django.core.mail import send_mail
 from django.contrib import messages
 from .models import Banner, Section
-from .forms import SignupForm
+from .forms import SignupForm, ProfileForm
 from django.contrib.auth import authenticate, login
 
 
@@ -40,9 +40,8 @@ def home(request):
     }
     return render(request, 'main/home.html', context)
 
+
 # SignUp
-
-
 def signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
@@ -55,3 +54,16 @@ def signup(request):
             return redirect('main:home')
     form = SignupForm
     return render(request, 'registration/signup.html', {'form': form})
+
+
+# Edit Profile
+def edit_profile(request):
+    msg = None
+
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            msg = 'Data has been saved'
+    form = ProfileForm(instance=request.user)
+    return render(request, 'registration/edit-profile.html', {'form': form, 'msg': msg})

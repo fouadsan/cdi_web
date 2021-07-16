@@ -147,6 +147,7 @@ class Wishlist(models.Model):
 # AdressBook
 class UserAddressBook(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    mobile = models.CharField(max_length=50, null=True)
     address = models.TextField()
     status = models.BooleanField(default=False)
 
